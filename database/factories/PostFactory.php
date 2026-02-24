@@ -21,6 +21,7 @@ class PostFactory extends Factory
         return [
             'title' => fake()->sentence(5),
             'slug' => fake()->slug(),
+            'num_of_views' => fake()->numberBetween(0, 200),
             'description' => fake()->paragraph(10),
             'commentable' => fake()->randomElement([1, 0]),
             'user_id' => User::inRandomOrder()->first()->id,

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->string('slug');
+            $table->bigInteger('num_of_views')->default(0);
             $table->boolean('commentable')->default(true);
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
