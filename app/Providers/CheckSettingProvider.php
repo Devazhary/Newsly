@@ -20,21 +20,23 @@ class CheckSettingProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Setting::firstOr(function(){
+        $getSetting = Setting::firstOr(function(){
             return Setting::create([
-                'site_name' => 'My Website',
+                'site_name' => 'Newsly',
                 'favicon' => 'favicon.ico',
-                'logo' => 'logo.png',
-                'facebook' => 'https://www.facebook.com/yourpage',
-                'instagram' => 'https://www.instagram.com/yourprofile',
-                'twitter' => 'https://www.twitter.com/yourprofile',
-                'youtube' => 'https://www.youtube.com/yourchannel',
-                'country' => 'Your Country',
-                'city' => 'Your City',
-                'street' => 'Your Street',
-                'email' => 'Your Email',
-                'phone' => 'Your Phone',
+                'logo' => '/img/logo.png',
+                'facebook' => 'https://www.facebook.com/',
+                'instagram' => 'https://www.instagram.com/',
+                'twitter' => 'https://x.com/',
+                'youtube' => 'https://www.youtube.com/',
+                'country' => 'Egypt',
+                'city' => 'Tanta',
+                'street' => 'elbahr st.',
+                'email' => 'fakeEmail@gmail.com',
+                'phone' => '01150304020',
             ]);
         });
+
+        view()->share('getSetting', $getSetting);
     }
 }
