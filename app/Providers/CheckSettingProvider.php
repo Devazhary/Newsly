@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\RelatedNewsSite;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
+use App\Models\Category;
 
 class CheckSettingProvider extends ServiceProvider
 {
@@ -39,10 +40,13 @@ class CheckSettingProvider extends ServiceProvider
         });
 
         $RelatedSites = RelatedNewsSite::select('name', 'url')->get();
+        
+        $categories = Category::select('slug', 'name')->get();
 
         view()->share([
             'getSetting' => $getSetting,
             'RelatedSites' => $RelatedSites,
+            'categories' => $categories,
         ]);
     }
 }
