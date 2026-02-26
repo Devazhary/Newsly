@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\RelatedNewsSite;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
 
@@ -37,6 +38,11 @@ class CheckSettingProvider extends ServiceProvider
             ]);
         });
 
-        view()->share('getSetting', $getSetting);
+        $RelatedSites = RelatedNewsSite::select('name', 'url')->get();
+
+        view()->share([
+            'getSetting' => $getSetting,
+            'RelatedSites' => $RelatedSites,
+        ]);
     }
 }

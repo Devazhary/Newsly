@@ -1,0 +1,27 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\RelatedNewsSite;
+use Faker\Factory;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class RelatedNewsSiteSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $facker = Factory::create();
+
+        for($i=0; $i<5; $i++)
+        {
+            RelatedNewsSite::create([
+                'name' => $facker->company(),
+                'url' => $facker->url(),
+            ]);
+        }
+    }
+}
