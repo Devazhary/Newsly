@@ -24,7 +24,7 @@ class CacheServiceProvider extends ServiceProvider
     {
         if (!Cache::has('read_more_posts')) 
         {
-            $read_more_posts = Post::select('id', 'title')
+            $read_more_posts = Post::select('id','slug', 'title')
             ->latest()
             ->take(10)
             ->get();
