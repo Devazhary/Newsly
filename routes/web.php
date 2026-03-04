@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\frontend\CategoryController;
 use App\Http\Controllers\frontend\PostController;
 use App\Http\Controllers\frontend\ContactController;
-
+use App\Http\Controllers\frontend\SearchController;
 
 
 Auth::routes();
@@ -28,4 +28,7 @@ Route::name('frontend.')->group(function () {
         Route::get('/', 'index')->name('show');
         Route::post('/store', 'store')->name('store');
     });
+
+    //search
+    Route::match(['get', 'post'], '/search', SearchController::class)->name('search');
 });

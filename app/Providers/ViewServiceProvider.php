@@ -25,17 +25,17 @@ class ViewServiceProvider extends ServiceProvider
     {
 
         $RelatedSites = RelatedNewsSite::select('id', 'name', 'url')->get();
-        $categories = Category::select('id', 'slug', 'name')->get();
+        $categories = Category::active()->select('id', 'slug', 'name')->get();
 
         if (!Cache::has('latest_posts')) {
-            $latest_posts = Post::select('id', 'title', 'slug')->latest()->take(5)->get();
+            $latest_posts = Post::active()->select('id', 'title', 'slug')->latest()->take(5)->get();
             Cache::remember('latest_posts', 3600, function () use ($latest_posts) {
                 return $latest_posts;
             });
         }
 
         if (!Cache::has('popular_posts')) {
-            $popular_posts = Post::withCount('comments')
+            $popular_posts = Post::active()->withCount('comments')
                 ->orderBy('comments_count', 'desc')
                 ->limit(5)
                 ->get();
