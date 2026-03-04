@@ -22,7 +22,7 @@ class SearchController extends Controller
         $keyword = strip_tags($request->search);
 
         //get results
-        $posts = Post::where('title', 'LIKE', '%' . $keyword . '%')
+        $posts = Post::active()->where('title', 'LIKE', '%' . $keyword . '%')
             ->orWhere('description', 'LIKE', '%' . $keyword . '%')
             ->paginate(15);
 

@@ -4,6 +4,7 @@
     <div class="main-news">
         <div class="container">
             <div class="row">
+                @if($posts->count() > 0)
                 <div class="col-lg-12">
 
                     <div class="row">
@@ -25,6 +26,13 @@
 
                     {{ $posts->links() }}
                 </div>
+                @else
+                <div class="col-lg-12">
+                    <div class="alert alert-danger">
+                        No Posts Founded
+                    </div>
+                </div>
+                @endif
 
             </div>
         </div>
