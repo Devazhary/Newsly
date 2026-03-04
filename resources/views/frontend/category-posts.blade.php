@@ -1,4 +1,8 @@
 @extends('layouts.frontend.app')
+@section('breadcrumb')
+    @parent
+    <li class="breadcrumb-item active">{{ $category->name }}</li>
+@endsection
 @section('body')
     <!-- Main News Start-->
     <br><br><br>
@@ -12,7 +16,7 @@
                                 <div class="mn-img">
                                     <img src="{{ $post->images->first()->path }}" />
                                     <div class="mn-title">
-                                        <a href="" title="{{ $post->title }}">{{ $post->title }}</a>
+                                        <a href="{{ route('frontend.post.show', $post->slug) }}" title="{{ $post->title }}">{{ $post->title }}</a>
                                     </div>
                                 </div>
                             </div>

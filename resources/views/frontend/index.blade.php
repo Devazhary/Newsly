@@ -1,4 +1,7 @@
 @extends('layouts.frontend.app')
+@section('breadcrumb')
+    @parent
+@endsection
 @section('body')
 
     @php

@@ -6,8 +6,7 @@
                 <div class="footer-widget">
                     <h3 class="title">Get in Touch</h3>
                     <div class="contact-info">
-                        <p><i class="fa fa-map-marker"></i>{{ $getSetting->street }}, {{ $getSetting->city }},
-                            {{ $getSetting->country }}</p>
+                        <p><i class="fa fa-map-marker"></i>{{ $getSetting->street }}, {{ $getSetting->city }}, {{ $getSetting->country }}</p>
                         <p><i class="fa fa-envelope"></i>{{ $getSetting->email }}</p>
                         <p><i class="fa fa-phone"></i>{{ $getSetting->phone }}</p>
                         <div class="social">
@@ -79,7 +78,7 @@
             <a href="">Cookies</a>
             <a href="">Accessibility help</a>
             <a href="">Advertise with us</a>
-            <a href="">Contact us</a>
+            <a href="{{ route('frontend.contact.show') }}">Contact us</a>
         </div>
     </div>
 </div>
