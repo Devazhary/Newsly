@@ -1,5 +1,9 @@
 @extends('layouts.frontend.app')
 
+@section('title')
+    {{ __('Verify Your Email Address') }}
+@endsection
+
 @section('body')
 <div class="container">
     <div class="row justify-content-center">
@@ -25,4 +29,5 @@
         </div>
     </div>
 </div>
+<br><br>
 @endsection

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Bootstrap News Template - Free HTML Templates</title>
+    <title>{{ config('app.name') }} | @yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Bootstrap News Template - Free HTML Templates" name="keywords" />
     <meta content="Bootstrap News Template - Free HTML Templates" name="description" />
@@ -22,6 +22,13 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('assets/frontend') }}/css/style.css" rel="stylesheet" />
+    
+    {{-- bootstrap file input --}}
+    <link href="{{ asset('assets/vendor/file-input/css/fileinput.min.css') }}" rel="stylesheet" />
+
+    {{-- summernote --}}
+    <link href="{{ asset('assets/vendor/summernote/summernote-bs4.min.css') }}" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -54,6 +61,13 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/frontend') }}/js/main.js"></script>
+
+    {{-- bootstrap file input --}}
+    <script src="{{ asset('assets/vendor/file-input/js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/file-input/themes/fa5/theme.min.js') }}"></script>
+
+    {{-- summernote --}}
+    <script src="{{ asset('assets/vendor/summernote/summernote-bs4.min.js') }}"></script>
     @stack('js')
 </body>
 

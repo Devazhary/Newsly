@@ -1,4 +1,7 @@
 @extends('layouts.frontend.app')
+@section('title')
+    Contact Us
+@endsection
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">Contact Us</li>

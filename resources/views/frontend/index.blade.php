@@ -1,4 +1,7 @@
 @extends('layouts.frontend.app')
+@section('title')
+    Home
+@endsection
 @section('breadcrumb')
     @parent
 @endsection

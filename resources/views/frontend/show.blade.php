@@ -1,4 +1,7 @@
 @extends('layouts.frontend.app')
+@section('title')
+    {{ $mainPost->title }}
+@endsection
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item"><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a></li>

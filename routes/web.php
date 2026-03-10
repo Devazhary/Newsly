@@ -8,11 +8,12 @@ use App\Http\Controllers\frontend\CategoryController;
 use App\Http\Controllers\frontend\PostController;
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\SearchController;
+use App\Http\Controllers\Auth\VerificationController;
 
+Route::redirect('/', '/home');
 
-Auth::routes();
 Route::name('frontend.')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/news-subs', [NewsSubsController::class, 'store'])->name('news-subs');
     Route::get('/category/{slug}', CategoryController::class)->name('category.posts');
 
@@ -32,3 +33,16 @@ Route::name('frontend.')->group(function () {
     //search
     Route::match(['get', 'post'], '/search', SearchController::class)->name('search');
 });
+
+
+Route::prefix('email')->name('verification.')->controller(VerificationController::class)->group(function () {
+   Route::get('/verify', 'show')->name('notice');
+   Route::get('/verify/{id}/{hash}', 'verify')->name('verify');
+   Route::post('/resend', 'resend')->name('resend');
+});
+
+Route::get('/profile', function () {
+    return view('frontend.dashboard.profile');
+});
+
+Auth::routes();

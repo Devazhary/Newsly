@@ -69,28 +69,13 @@
 </div>
 <!-- Footer End -->
 
-<!-- Footer Menu Start -->
-<div class="footer-menu">
-    <div class="container">
-        <div class="f-menu">
-            <a href="">Terms of use</a>
-            <a href="">Privacy policy</a>
-            <a href="">Cookies</a>
-            <a href="">Accessibility help</a>
-            <a href="">Advertise with us</a>
-            <a href="{{ route('frontend.contact.show') }}">Contact us</a>
-        </div>
-    </div>
-</div>
-<!-- Footer Menu End -->
-
 <!-- Footer Bottom Start -->
 <div class="footer-bottom">
     <div class="container">
         <div class="row">
             <div class="col-md-6 copyright">
                 <p>
-                    Copyright &copy; <a href="">Your Site Name</a>. All Rights
+                    Copyright &copy; <a href="">{{config('app.name')}}</a>. All Rights
                     Reserved
                 </p>
             </div>

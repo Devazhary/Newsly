@@ -1,4 +1,7 @@
 @extends('layouts.frontend.app')
+@section('title')
+    {{ $category->name }} Posts
+@endsection
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">{{ $category->name }}</li>
