@@ -17,9 +17,11 @@
                         @forelse ($posts as $post)
                             <div class="col-md-4">
                                 <div class="mn-img">
-                                    <img src="{{ $post->images->first()->path }}" />
+                                    <img src="{{ asset($post->images->first()->path) }}" width="350px" height="200px"
+                                        style="object-fit: cover;" alt="{{ $post->title }}" />
                                     <div class="mn-title">
-                                        <a href="{{ route('frontend.post.show', $post->slug) }}" title="{{ $post->title }}">{{ $post->title }}</a>
+                                        <a href="{{ route('frontend.post.show', $post->slug) }}"
+                                            title="{{ $post->title }}">{{ $post->title }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +39,9 @@
                         <h2>Read More</h2>
                         <ul>
                             @foreach ($categories as $category)
-                                <li><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a></li>
+                                <li><a
+                                        href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>

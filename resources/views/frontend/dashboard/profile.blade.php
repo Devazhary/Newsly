@@ -13,14 +13,14 @@
         <aside class="col-md-3 nav-sticky dashboard-sidebar">
             <!-- User Info Section -->
             <div class="user-info text-center p-3">
-                <img src="{{ asset('test.jpg') }}" alt="User Image" class="rounded-circle mb-2"
+                <img src="{{ asset(Auth::guard('web')->user()->image) }}" alt="User Image" class="rounded-circle mb-2"
                     style="width: 80px; height: 80px; object-fit: cover" />
-                <h5 class="mb-0" style="color: #ff6f61">Salem Taha</h5>
+                <h5 class="mb-0" style="color: #ff6f61">{{ Auth::guard('web')->user()->name }}</h5>
             </div>
 
             <!-- Sidebar Menu -->
             <div class="list-group profile-sidebar-menu">
-                <a href="./dashboard.html" class="list-group-item list-group-item-action active menu-item"
+                <a href="{{ route('frontend.dashboard.profile.index') }}" class="list-group-item list-group-item-action active menu-item"
                     data-section="profile">
                     <i class="fas fa-user"></i> Profile
                 </a>
@@ -40,45 +40,57 @@
             <section id="profile" class="content-section active">
                 <h2>User Profile</h2>
                 <div class="user-profile mb-3">
-                    <img src="{{ asset('test.jpg') }}" alt="User Image" class="profile-img rounded-circle"
-                        style="width: 100px; height: 100px;" />
-                    <span class="username">Salem Taha</span>
+                    <img src="{{ asset(Auth::guard('web')->user()->image) }}" alt="User Image"
+                        class="profile-img rounded-circle" style="width: 100px; height: 100px;" />
+                    <span class="username">{{ Auth::guard('web')->user()->name }}</span>
                 </div>
                 <br>
 
-                <!-- Add Post Section -->
-                <section id="add-post" class="add-post-section mb-5">
-                    <h2>Add Post</h2>
-                    <div class="post-form p-3 border rounded">
-                        <!-- Post Title -->
-                        <input type="text" id="postTitle" class="form-control mb-2" placeholder="Post Title" />
-
-                        <!-- Post Content -->
-                        <textarea id="postContent" class="form-control mb-2" rows="3" placeholder="What's on your mind?"></textarea>
-
-                        <!-- Image Upload -->
-                        <input type="file" id="postImage" class="form-control mb-2" accept="image/*" multiple />
-                        <div class="tn-slider mb-2">
-                            <div id="imagePreview" class="slick-slider"></div>
-                        </div>
-
-                        <!-- Category Dropdown -->
-                        <select id="postCategory" class="form-select mb-2">
-                            <option value="">Select Category</option>
-                            <option value="general">General</option>
-                            <option value="tech">Tech</option>
-                            <option value="life">Life</option>
-                        </select>
-
-                        <!-- Enable Comments Checkbox -->
-                        <label class="form-check-label mb-2">
-                            <input type="checkbox" class="form-check-input" /> Enable Comments
-                        </label><br>
-
-                        <!-- Post Button -->
-                        <button class="btn btn-primary post-btn">Post</button>
+                @if (session()->has('errors'))
+                    <div class="alert alert-danger">
+                        @foreach (session('errors')->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
                     </div>
-                </section>
+                @endif
+
+                <form action="{{ route('frontend.dashboard.profile.post.store') }}" method="post"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <!-- Add Post Section -->
+                    <section id="add-post" class="add-post-section mb-5">
+                        <h2>Add Post</h2>
+                        <div class="post-form p-3 border rounded">
+                            <!-- Post Title -->
+                            <input name="title" type="text" id="postTitle" class="form-control mb-2" placeholder="Post Title" />
+
+                            <!-- Post Content -->
+                            <textarea name="description" id="postContent" class="form-control mb-2" rows="3" placeholder="What's on your mind?"></textarea>
+
+                            <!-- Image Upload -->
+                            <input name="images[]" type="file" id="postImage" class="form-control mb-2" accept="image/*" multiple />
+                            <div class="tn-slider mb-2">
+                                <div id="imagePreview" class="slick-slider"></div>
+                            </div>
+
+                            <!-- Category Dropdown -->
+                            <select name="category_id" id="postCategory" class="form-select mb-2">
+                                <option value="">Select Category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+
+                            <!-- Enable Comments Checkbox -->
+                            <label class="form-check-label mb-2">
+                                <input name="commentable" type="checkbox" class="form-check-input" /> Enable Comments
+                            </label><br>
+
+                            <!-- Post Button -->
+                            <button class="btn btn-primary post-btn">Post</button>
+                        </div>
+                    </section>
+                </form>
 
                 <!-- Posts Section -->
                 <section id="posts" class="posts-section">

@@ -9,6 +9,7 @@ use App\Http\Controllers\frontend\PostController;
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\SearchController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\frontend\Dashboard\ProfileController;
 
 Route::redirect('/', '/home');
 
@@ -32,6 +33,14 @@ Route::name('frontend.')->group(function () {
 
     //search
     Route::match(['get', 'post'], '/search', SearchController::class)->name('search');
+
+    //user dashboard 
+    Route::prefix('account')->name('dashboard.')->middleware(['auth:web', 'verified'])->group(function(){
+        Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function(){
+            Route::get('/', 'index')->name('index');
+            Route::post('/post/store', 'postStore')->name('post.store');
+        });
+    });
 });
 
 
@@ -39,10 +48,6 @@ Route::prefix('email')->name('verification.')->controller(VerificationController
    Route::get('/verify', 'show')->name('notice');
    Route::get('/verify/{id}/{hash}', 'verify')->name('verify');
    Route::post('/resend', 'resend')->name('resend');
-});
-
-Route::get('/profile', function () {
-    return view('frontend.dashboard.profile');
 });
 
 Auth::routes();

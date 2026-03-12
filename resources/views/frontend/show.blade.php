@@ -4,7 +4,8 @@
 @endsection
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a>
+    </li>
     <li class="breadcrumb-item active">{{ $mainPost->title }}</li>
 @endsection
 @section('body')
@@ -24,12 +25,9 @@
 
                             @foreach ($mainPost->images as $index => $image)
                                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                    <img src="{{ $image->path }}" alt="First Slide">
+                                    <img height="450" width="750" src="{{ asset($image->path) }}" alt="First Slide">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>{{ $mainPost->title }}</h5>
-                                        <p>
-                                            {{ substr($mainPost->description, 0, 80) }}...
-                                        </p>
                                     </div>
                                 </div>
                             @endforeach
@@ -46,31 +44,38 @@
                         </a>
                     </div>
                     <div class="sn-content">
-                        {{ $mainPost->description }}
+                        {!! $mainPost->description !!}
                     </div>
 
                     <!-- Comment Section -->
                     <div class="comment-section">
+
                         <!-- Comment Input -->
-                        <form id="commentForm">
-                            @csrf
-                            <div class="comment-input">
-                                <input name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
-                                <input type="hidden" name="post_id" value="{{ $mainPost->id }}">
-                                <input type="hidden" name="user_id" value="1">
-                                <button type="submit">Comment</button>
+                        @if ($mainPost->commentable == true)
+                            @auth
+                                <form id="commentForm">
+                                    @csrf
+                                    <div class="comment-input">
+                                        <input name="comment" type="text" placeholder="Add a comment..." id="commentBox" />
+                                        <input type="hidden" name="post_id" value="{{ $mainPost->id }}">
+                                        <input type="hidden" name="user_id" value="{{ auth()->guard('web')->user()->id }}">
+                                        <button type="submit">Comment</button>
+                                    </div>
+                                </form>
+                            @endauth
+                        @else
+                            <div class="alert alert-info">
+                                Comment Disabled
                             </div>
-                        </form>
+                        @endif
 
-                        <div style="display: none" class="alert alert-danger" id="errorMsg">
-
-                        </div>
 
                         <!-- Display Comments -->
                         <div class="comments">
                             @foreach ($mainPost->comments as $comment)
                                 <div class="comment">
-                                    <img src="{{ $comment->user->image }}" alt="User Image" class="comment-img" />
+                                    <img height="40" width="40" src="{{ asset($comment->user->image) }}"
+                                        alt="User Image" class="comment-img" />
                                     <div class="comment-content">
                                         <span class="username">{{ $comment->user->name }}</span>
                                         <p class="comment-text">{{ $comment->comment }}</p>
@@ -78,12 +83,17 @@
                                 </div>
                             @endforeach
 
-
                             <!-- Add more comments here for demonstration -->
                         </div>
 
                         <!-- Show More Button -->
-                        <button id="showMoreBtn" class="show-more-btn">Show more</button>
+                        @if ($mainPost->comments->count() > 0)
+                            <button id="showMoreBtn" class="show-more-btn">Show more</button>
+                        @else
+                            <alert class="alert-info">
+                                No Comments Yet.
+                            </alert>
+                        @endif
                     </div>
 
                     <!-- Related News -->
@@ -93,8 +103,8 @@
                             @foreach ($posts_belong_to_category as $post)
                                 <div class="col-md-4">
                                     <div class="sn-img">
-                                        <img src="{{ $post->images->first()->path }}" class="img-fluid"
-                                            alt="{{ $post->title }}" />
+                                        <img height="180" width="255" src="{{ asset($post->images->first()->path) }}"
+                                            class="img-fluid" alt="{{ $post->title }}" />
                                         <div class="sn-title">
                                             <a href="{{ route('frontend.post.show', $post->slug) }}"
                                                 title="{{ $post->title }}">{{ $post->title }}</a>
@@ -115,7 +125,8 @@
                                 @foreach ($posts_belong_to_category as $post)
                                     <div class="nl-item">
                                         <div class="nl-img">
-                                            <img src="{{ $post->images->first()->path }}" />
+                                            <img height="80" width="120"
+                                                src="{{ asset($post->images->first()->path) }}" />
                                         </div>
                                         <div class="nl-title">
                                             <a href="{{ route('frontend.post.show', $post->slug) }}"
@@ -143,7 +154,8 @@
                                         @foreach ($latest_posts as $post)
                                             <div class="tn-news">
                                                 <div class="tn-img">
-                                                    <img src="{{ $post->images->first()->path }}" />
+                                                    <img height="80" width="120"
+                                                        src="{{ asset($post->images->first()->path) }}" />
                                                 </div>
                                                 <div class="tn-title">
                                                     <a href="{{ route('frontend.post.show', $post->slug) }}"
@@ -157,7 +169,8 @@
                                         @foreach ($popular_posts as $post)
                                             <div class="tn-news">
                                                 <div class="tn-img">
-                                                    <img src="{{ $post->images->first()->path }}" />
+                                                    <img height="80" width="120"
+                                                        src="{{ asset($post->images->first()->path) }}" />
                                                 </div>
                                                 <div class="tn-title">
                                                     <a href="{{ route('frontend.post.show', $post->slug) }}"

@@ -78,7 +78,7 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="{{ route('frontend.home') }}" class="nav-item nav-link active">Home</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
                         <div class="dropdown-menu">
@@ -90,7 +90,7 @@
                     </div>
                     
                     <a href="{{ route('frontend.contact.show') }}" class="nav-item nav-link">Contact Us</a>
-                    <a href="dashboard.html" class="nav-item nav-link">Dashboard</a>
+                    <a href="{{ route('frontend.dashboard.profile.index') }}" class="nav-item nav-link">Dashboard</a>
                 </div>
                 <div class="social ml-auto">
                     <a href="{{ $getSetting->twitter }}" title="X" target="_blank"><i
