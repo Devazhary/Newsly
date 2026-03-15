@@ -263,7 +263,7 @@
                 success: function(data) {
                     $('#errorMsg').hide();
                     $('.comments').prepend(`<div class="comment">
-                                    <img src="${data.comment.user.image}" alt="User Image" class="comment-img" />
+                                    <img src="{{ asset('') }}${data.comment.user.image}" alt="User Image" class="comment-img" />
                                     <div class="comment-content">
                                         <span class="username">${ data.comment.user.name}</span>
                                         <p class="comment-text">${data.comment.comment}</p>

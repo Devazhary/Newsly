@@ -34,11 +34,14 @@ Route::name('frontend.')->group(function () {
     //search
     Route::match(['get', 'post'], '/search', SearchController::class)->name('search');
 
-    //user dashboard 
+    //user dashboard profile
     Route::prefix('account')->name('dashboard.')->middleware(['auth:web', 'verified'])->group(function(){
         Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function(){
             Route::get('/', 'index')->name('index');
             Route::post('/post/store', 'postStore')->name('post.store');
+            Route::get('//posts/{slug}/edit', 'postEdit')->name('post.edit');
+            Route::delete('/post/{slug}', 'postDelete')->name('post.delete');
+            Route::get('/posts/get-comments/{id}', 'getComments')->name('post.getComments');
         });
     });
 });

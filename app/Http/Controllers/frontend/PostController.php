@@ -25,6 +25,7 @@ class PostController extends Controller
             ->take(6)
             ->get();
 
+        $mainPost->increment('num_of_views');
 
         return view('frontend.show', compact('mainPost', 'posts_belong_to_category', 'category'));
     }

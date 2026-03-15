@@ -20,8 +20,8 @@
 
             <!-- Sidebar Menu -->
             <div class="list-group profile-sidebar-menu">
-                <a href="{{ route('frontend.dashboard.profile.index') }}" class="list-group-item list-group-item-action active menu-item"
-                    data-section="profile">
+                <a href="{{ route('frontend.dashboard.profile.index') }}"
+                    class="list-group-item list-group-item-action active menu-item" data-section="profile">
                     <i class="fas fa-user"></i> Profile
                 </a>
                 <a href="./notifications.html" class="list-group-item list-group-item-action menu-item"
@@ -62,13 +62,16 @@
                         <h2>Add Post</h2>
                         <div class="post-form p-3 border rounded">
                             <!-- Post Title -->
-                            <input name="title" type="text" id="postTitle" class="form-control mb-2" placeholder="Post Title" />
+                            <input name="title" type="text" id="postTitle" class="form-control mb-2"
+                                placeholder="Post Title" />
 
                             <!-- Post Content -->
-                            <textarea name="description" id="postContent" class="form-control mb-2" rows="3" placeholder="What's on your mind?"></textarea>
+                            <textarea name="description" id="postContent" class="form-control mb-2" rows="3"
+                                placeholder="What's on your mind?"></textarea>
 
                             <!-- Image Upload -->
-                            <input name="images[]" type="file" id="postImage" class="form-control mb-2" accept="image/*" multiple />
+                            <input name="images[]" type="file" id="postImage" class="form-control mb-2" accept="image/*"
+                                multiple />
                             <div class="tn-slider mb-2">
                                 <div id="imagePreview" class="slick-slider"></div>
                             </div>
@@ -92,97 +95,113 @@
                     </section>
                 </form>
 
-                <!-- Posts Section -->
+                <!-- Show Posts Section -->
                 <section id="posts" class="posts-section">
                     <h2>Recent Posts</h2>
                     <div class="post-list">
-                        <!-- Post Item -->
-                        <div class="post-item mb-4 p-3 border rounded">
-                            <div class="post-header d-flex align-items-center mb-2">
-                                <img src="{{ asset('test.jpg') }}" alt="User Image" class="rounded-circle"
-                                    style="width: 50px; height: 50px;" />
-                                <div class="ms-3">
-                                    <h5 class="mb-0">Salem Taha</h5>
-                                    <small class="text-muted">2 hours ago</small>
-                                </div>
-                            </div>
-                            <h4 class="post-title">Post Title Here</h4>
-                            <p class="post-content">This is an example post content. The user can share their thoughts,
-                                upload images, and more.</p>
 
-                            <div id="newsCarousel" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#newsCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#newsCarousel" data-slide-to="1"></li>
-                                    <li data-target="#newsCarousel" data-slide-to="2"></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item  active">
-                                        <img src="{{ asset('test.jpg') }}" class="d-block w-100" alt="First Slide">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h5>dsfdk</h5>
-                                            <p>
-                                                oookok
-                                            </p>
-                                        </div>
+                        @forelse ($posts as $post)
+                            <!-- Post Item -->
+                            <div class="post-item mb-4 p-3 border rounded">
+                                <div class="post-header d-flex align-items-center mb-2">
+                                    <img src="{{ asset(auth()->guard('web')->user()->image) }}" alt="User Image"
+                                        class="rounded-circle" style="width: 50px; height: 50px;" />
+                                    <div class="ms-3">
+                                        <h5 class="mb-0">{{ auth()->guard('web')->user()->name }}</h5>
                                     </div>
-                                    <div class="carousel-item ">
-                                        <img src="{{ asset('test.jpg') }}" class="d-block w-100" alt="First Slide">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h5>dsfdk</h5>
-                                            <p>
-                                                oookok
-                                            </p>
-                                        </div>
+                                </div>
+                                <h4 class="post-title">{{ $post->title }}</h4>
+                                <div class="post-content">{!! $post->description !!}</div>
+
+                                <div id="newsCarousel" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#newsCarousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#newsCarousel" data-slide-to="1"></li>
+                                        <li data-target="#newsCarousel" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+
+                                        @foreach ($post->images as $key => $image)
+                                            <div class="carousel-item @if ($key == 0) active @endif ">
+                                                <img height="400" width="600" src="{{ asset($image->path) }}"
+                                                    class="d-block w-100" alt="First Slide">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5>{{ $post->title }}</h5>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                        <!-- Add more carousel-item blocks for additional slides -->
                                     </div>
-
-                                    <!-- Add more carousel-item blocks for additional slides -->
-                                </div>
-                                <a class="carousel-control-prev" href="#newsCarousel" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#newsCarousel" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-
-                            <div class="post-actions d-flex justify-content-between">
-                                <div class="post-stats">
-                                    <!-- View Count -->
-                                    <span class="me-3">
-                                        <i class="fas fa-eye"></i> 123 views
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="fas fa-edit"></i> Edit
+                                    <a class="carousel-control-prev" href="#newsCarousel" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="fas fa-thumbs-up"></i> Delete
+                                    <a class="carousel-control-next" href="#newsCarousel" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
                                     </a>
-                                    <button class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-comment"></i> Comments
-                                    </button>
                                 </div>
-                            </div>
 
-                            <!-- Display Comments -->
-                            <div class="comments">
-                                <div class="comment">
-                                    <img src="{{ asset('test.jpg') }}" alt="User Image" class="comment-img" />
-                                    <div class="comment-content">
-                                        <span class="username"></span>
-                                        <p class="comment-text">first comment</p>
+                                <div class="post-actions d-flex justify-content-between">
+                                    <div class="post-stats">
+                                        <!-- View Count -->
+                                        <span class="me-3">
+                                            <i class="fas fa-eye"></i>{{ $post->num_of_views }}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <a href="{{ route('frontend.dashboard.profile.post.edit', $post->slug) }}"
+                                            class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                            onclick="if(confirm('Are you sure to delete this post!'))
+                                            {
+                                                document.getElementById('formDelete{{ $post->id }}').submit()
+                                            }return false"
+                                            class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-thumbs-up"></i> Delete
+                                        </a>
+                                        
+                                        {{-- show comments --}}
+                                        <button id="commentBtn_{{ $post->id }}" class="commentBtn" post_id="{{ $post->id }}"
+                                            class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-comment"></i> Comments
+                                        </button>
+
+                                        {{-- hide comments --}}
+                                        <button id="hideBtn_{{ $post->id }}" class="hideBtn" post_id="{{ $post->id }}"
+                                            class="btn btn-sm btn-outline-secondary" style="display: none">
+                                            <i class="fas fa-comment"></i> Hide Comments
+                                        </button>
+
+                                        <form id="formDelete{{ $post->id }}"
+                                            action="{{ route('frontend.dashboard.profile.post.delete', $post->slug) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     </div>
                                 </div>
-                                <!-- Add more comments here for demonstration -->
-                            </div>
-                        </div>
 
-                        <!-- Add more posts here dynamically -->
+                                <!-- Display Comments -->
+                                <div class="comments{{ $post->id }}">
+
+                                    <!-- Add more comments here for demonstration -->
+                                </div>
+                            </div>
+                            <!-- Add more posts here dynamically -->
+
+                        @empty
+                            <div class="alert alert-info">
+                                No Posts Added Yet!
+                            </div>
+                        @endforelse
+
                     </div>
                 </section>
             </section>
@@ -198,12 +217,58 @@
                 theme: 'fa5',
                 allowedFileTypes: ['image'],
                 MaxFileCount: 5,
+                showUpload: false,
             });
 
             //summernote
             $('#postContent').summernote({
                 height: 300,
             });
+        });
+
+        // get comments
+        $(document).on('click', '.commentBtn', function(e) {
+            e.preventDefault();
+            var post_id = $(this).attr('post_id');
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('frontend.dashboard.profile.post.getComments', ':post_id') }}".replace(
+                    ':post_id', post_id),
+                success: function(response) {
+                    $.each(response.data, function(key, comment) {
+                        $('.comments'+post_id).empty();
+                        
+                        $('.comments'+post_id).show();
+
+                        $('.comments'+post_id).append(`
+                            <div class="comment">
+                                    <img src="{{ asset('') }}${comment.user.image}" alt="User Image" class="comment-img" />
+                                    <div class="comment-content">
+                                        <span class="username">${comment.user.name}</span>
+                                        <p class="comment-text">${comment.comment}</p>
+                                    </div>
+                            </div>
+                        `);
+
+                        $('#commentBtn_'+post_id).hide();
+                        $('#hideBtn_'+post_id).show();
+                    });
+                },
+            });
+        });
+
+        //hide button
+        $(document).on('click', '.hideBtn', function(e){
+            e.preventDefault();
+            var post_id = $(this).attr('post_id');
+
+            //hide comments section
+            $('.comments'+post_id).hide();
+            //show commentBtn
+            $('#commentBtn_'+post_id).show();
+            //hide hideBtn
+            $('#hideBtn_'+post_id).hide();
         });
     </script>
 @endpush

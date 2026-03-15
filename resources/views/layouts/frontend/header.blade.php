@@ -18,7 +18,7 @@
                         <a href="javascript:void(0)"
                             onclick="if(confirm('Are you sure you want to logout?')){
                                 document.getElementById('logoutForm').submit();
-                            }"
+                            } return false"
                             title="Logout">
                             Logout
                         </a>
