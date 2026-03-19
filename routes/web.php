@@ -10,6 +10,7 @@ use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\SearchController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\frontend\Dashboard\ProfileController;
+use App\Http\Controllers\frontend\Dashboard\SettingController;
 
 Route::redirect('/', '/home');
 
@@ -34,14 +35,22 @@ Route::name('frontend.')->group(function () {
     //search
     Route::match(['get', 'post'], '/search', SearchController::class)->name('search');
 
-    //user dashboard profile
+    //user dashboard
     Route::prefix('account')->name('dashboard.')->middleware(['auth:web', 'verified'])->group(function(){
+
+        //profile part
         Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function(){
             Route::get('/', 'index')->name('index');
             Route::post('/post/store', 'postStore')->name('post.store');
             Route::get('//posts/{slug}/edit', 'postEdit')->name('post.edit');
             Route::delete('/post/{slug}', 'postDelete')->name('post.delete');
             Route::get('/posts/get-comments/{id}', 'getComments')->name('post.getComments');
+        });
+
+        // setting part
+        Route::controller(SettingController::class)->prefix('setting')->name('setting.')->group(function(){
+            Route::get('/', 'index')->name('index');
+            Route::post('/update', 'update')->name('update');
         });
     });
 });
