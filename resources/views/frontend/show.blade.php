@@ -89,10 +89,6 @@
                         <!-- Show More Button -->
                         @if ($mainPost->comments->count() > 0)
                             <button id="showMoreBtn" class="show-more-btn">Show more</button>
-                        @else
-                            <alert class="alert-info">
-                                No Comments Yet.
-                            </alert>
                         @endif
                     </div>
 

@@ -46,7 +46,7 @@
                     <label for="name">Name:</label>
                     <input name="name" type="text" id="name" value="{{ $user->name }}" />
                     @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -55,7 +55,7 @@
                     <label for="username">Username:</label>
                     <input name="username" type="text" id="username" value="{{ $user->username }}" />
                     @error('username')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -64,7 +64,7 @@
                     <label for="email">Email:</label>
                     <input name="email" type="email" id="email" value="{{ $user->email }}" />
                     @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -73,7 +73,7 @@
                     <label for="phone">Phone:</label>
                     <input name="phone" type="string" id="phone" value="{{ $user->phone }}" />
                     @error('phone')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -82,7 +82,7 @@
                     <label for="profile-image">Profile Image:</label>
                     <input name="image" type="file" id="profile-image" accept="image/*" />
                     @error('image')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -91,7 +91,7 @@
                     <label for="country">Country:</label>
                     <input name="country" type="text" id="country" value="{{ $user->country }}" />
                     @error('country')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -100,7 +100,7 @@
                     <label for="city">City:</label>
                     <input name="city" type="text" id="city" value="{{ $user->city }}" />
                     @error('city')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -109,7 +109,7 @@
                     <label for="street">Street:</label>
                     <input name="street" type="text" id="street" value="{{ $user->street }}" />
                     @error('street')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -119,19 +119,26 @@
             </form>
 
             <!-- Form to change the password -->
-            <form class="change-password-form">
+            <form class="change-password-form" method="POST" action="{{ route('frontend.dashboard.setting.changePassword') }}">
+                @csrf
                 <h2>Change Password</h2>
                 <div class="form-group">
                     <label for="current-password">Current Password:</label>
-                    <input type="password" id="current-password" placeholder="Enter Current Password" />
+                    <input name="current_password" type="password" id="current-password" placeholder="Enter Current Password" />
+                    @error('current_password')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="new-password">New Password:</label>
-                    <input type="password" id="new-password" placeholder="Enter New Password" />
+                    <input name="password" type="password" id="new-password" placeholder="Enter New Password" />
+                    @error('password')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="confirm-password">Confirm New Password:</label>
-                    <input type="password" id="confirm-password" placeholder="Enter Confirm New " />
+                    <input name="password_confirmation" type="password" id="confirm-password" placeholder="Enter Confirm New " />
                 </div>
                 <button type="submit" class="change-password-btn">
                     Change Password

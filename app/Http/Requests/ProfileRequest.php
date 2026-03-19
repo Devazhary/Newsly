@@ -26,7 +26,7 @@ class ProfileRequest extends FormRequest
             'description' => ['required', 'string', 'min:10'],
             'commentable' => ['in:on,off'],
             'category_id' => ['exists:categories,id'],
-            'images' => ['required'],
+            'images' => ['nullable'],
             'images.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
         ];
     }

@@ -154,7 +154,7 @@
                                     </div>
 
                                     <div>
-                                        <a href="{{ route('frontend.dashboard.profile.post.edit', $post->slug) }}"
+                                        <a href="{{ route('frontend.dashboard.profile.post.show.form', $post->slug) }}"
                                             class="btn btn-sm btn-outline-primary">
                                             <i class="fas fa-edit"></i> Edit
                                         </a>

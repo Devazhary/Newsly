@@ -42,15 +42,19 @@ Route::name('frontend.')->group(function () {
         Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function(){
             Route::get('/', 'index')->name('index');
             Route::post('/post/store', 'postStore')->name('post.store');
-            Route::get('//posts/{slug}/edit', 'postEdit')->name('post.edit');
             Route::delete('/post/{slug}', 'postDelete')->name('post.delete');
             Route::get('/posts/get-comments/{id}', 'getComments')->name('post.getComments');
+
+            Route::get('post/{slug}/edit-form', 'showForm')->name('post.show.form');
+            Route::put('/post/{slug}/edit', 'postEdit')->name('post.edit');
+            Route::post('/post/delete-image', 'deleteImage')->name('post.delete.image');
         });
 
         // setting part
         Route::controller(SettingController::class)->prefix('setting')->name('setting.')->group(function(){
             Route::get('/', 'index')->name('index');
             Route::post('/update', 'update')->name('update');
+            Route::post('/change-password', 'changePassword')->name('changePassword');
         });
     });
 });
@@ -60,6 +64,10 @@ Route::prefix('email')->name('verification.')->controller(VerificationController
    Route::get('/verify', 'show')->name('notice');
    Route::get('/verify/{id}/{hash}', 'verify')->name('verify');
    Route::post('/resend', 'resend')->name('resend');
+});
+
+Route::get('/test', function(){
+    return view('frontend.dashboard.edit-post');
 });
 
 Auth::routes();

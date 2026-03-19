@@ -22,43 +22,45 @@ class ImageManger
             }
         }
 
-        if($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
-            if(File::exists(public_path($user->image)))
-            {
+            if (File::exists(public_path($user->image))) {
                 File::delete(public_path($user->image));
             }
 
             $fileName = self::generateImageName($image);
             $path = self::storeImageLocal($image, 'users', $fileName);
 
-            $user->update(['image'=>$path]);
+            $user->update(['image' => $path]);
         }
-
     }
 
     public static function deleteImages($post)
     {
         if ($post->images()->count() > 0) {
-            foreach ($post->images() as $image) {
-                if (File::exists(public_path($image->path))) {
-                    File::delete(public_path($image->path));
-                }
+            foreach ($post->images as $image) {
+                self::deleteImageInLocalAndDb($image);
             }
         }
     }
 
-    private static function generateImageName($image)
+    public static function deleteImageInLocalAndDb($image)
+    {
+        if (File::exists(public_path($image->path))) {
+            File::delete(public_path($image->path));
+        }
+        $image->delete();
+    }
+
+    public static function generateImageName($image)
     {
         $fileName = Str::uuid() . time() . '.' . $image->getClientOriginalExtension();
         return $fileName;
     }
 
-    private static function storeImageLocal($image, $path, $fileName)
+    public static function storeImageLocal($image, $path, $fileName)
     {
-        $path = $image->storeAs('uploads/'.$path, $fileName, ['disk' => 'uploads']);
+        $path = $image->storeAs('uploads/' . $path, $fileName, ['disk' => 'uploads']);
         return $path;
     }
-
 }
