@@ -24,9 +24,13 @@
                 <div class="footer-widget">
                     <h3 class="title">Useful Links</h3>
                     <ul>
-                        @foreach ($RelatedSites as $site)
+                        @forelse ($RelatedSites as $site)
                             <li><a href="{{ $site->url }}" title="{{ $site->name }}">{{ $site->name }}</a></li>
-                        @endforeach
+                        @empty
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">About Us</a></li>
+                        @endforelse
                     </ul>
                 </div>
             </div>
@@ -52,14 +56,17 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             Vivamus sed porta dui. Class aptent taciti sociosqu
                         </p>
-                        <form action="{{ route('frontend.news-subs') }}" method="POST">
-
+                        <form action="{{ route('frontend.news-subs') }}" method="POST" class="mt-4">
                             @csrf
-                            <input class="form-control" type="email" placeholder="Your email here" name="email" />
+                            <div class="input-group newsletter-group">
+                                <input class="form-control" type="email" placeholder="Email Address" name="email" required />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary px-3" type="submit">Subscribe</button>
+                                </div>
+                            </div>
                             @error('email')
-                                <span class="text-danger">{{ $message }}</span>
+                                <small class="text-danger mt-1 d-block">{{ $message }}</small>
                             @enderror
-                            <button class="btn">Submit</button>
                         </form>
                     </div>
                 </div>

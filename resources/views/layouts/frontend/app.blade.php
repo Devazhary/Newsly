@@ -22,6 +22,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('assets/frontend') }}/css/style.css" rel="stylesheet" />
+    <link href="{{ asset('assets/frontend') }}/css/custom-theme.css" rel="stylesheet" />
 
     {{-- bootstrap file input --}}
     <link href="{{ asset('assets/vendor/file-input/css/fileinput.min.css') }}" rel="stylesheet" />

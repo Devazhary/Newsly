@@ -1,0 +1,307 @@
+/* Global White Theme & News Magazine Override */
+
+:root {
+    --bg-white: #ffffff;
+    --bg-light: #f8fafc; /* very light blue/gray for subtle backgrounds */
+    --bg-light-alt: #f1f5f9;
+    --text-dark: #1e293b; /* deep slate */
+    --text-muted: #64748b;
+    --border-light: #e2e8f0;
+    
+    /* Professional News Blue Theme */
+    --primary-color: #2563eb; 
+    --primary-hover: #1d4ed8;
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --radius-md: 8px;
+    --font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--bg-light) !important;
+    color: var(--text-dark) !important;
+    font-family: var(--font-family) !important;
+}
+
+a {
+    transition: color 0.3s ease;
+    color: var(--text-dark);
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--primary-color) !important;
+}
+
+/* ==================================
+          STRONG COLOR OVERRIDES
+   KILLING THE DEFAULT ORANGE THEME
+================================== */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.btn-primary, button[type="submit"].btn {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover, button[type="submit"].btn:hover {
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
+}
+
+.btn-outline-primary {
+    background-color: transparent !important;
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+}
+
+/* Badges and Tabs */
+.badge-primary, .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+}
+
+.custom-tabs .nav-link.active::after {
+    background: var(--primary-color) !important;
+}
+
+.custom-tabs .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* Section h2 lines */
+.section-header h2::after {
+    background: var(--primary-color) !important;
+}
+
+/* Navigation Links overrides */
+.nav-link:hover, .dropdown-item:hover,
+.nav-link.active, .dropdown-item.active {
+    background-color: var(--primary-color) !important;
+    color: #ffffff !important;
+    border-radius: 4px;
+}
+
+/* Icons inside active/hover links */
+.nav-link:hover i, .dropdown-item:hover i,
+.nav-link.active i, .dropdown-item.active i {
+    color: #ffffff !important;
+}
+
+
+/* ==================================
+             COMPACT HEADER 
+================================== */
+.compact-header {
+    border-bottom: 1px solid var(--border-light);
+}
+
+.compact-header .navbar-nav .nav-link {
+    padding: 10px 15px;
+    color: var(--text-dark) !important;
+    font-size: 15px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.compact-header .navbar-nav .nav-link:hover,
+.compact-header .navbar-nav .nav-link.active {
+    background-color: var(--primary-color) !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.compact-header .dropdown-item {
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: 0.2s;
+}
+
+.compact-header .dropdown-item:hover {
+    background: var(--primary-color) !important;
+    color: #ffffff !important;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #ffffff !important;
+}
+
+.pagination .page-link:hover {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #ffffff !important;
+}
+
+
+/* ==================================
+             BREADCRUMB 
+================================== */
+.breadcrumb-wrap {
+    background: var(--bg-white);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+.breadcrumb {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.breadcrumb-item a {
+    color: var(--text-muted);
+}
+.breadcrumb-item a:hover {
+    color: var(--primary-color) !important;
+}
+.breadcrumb-item.active {
+    color: var(--text-dark);
+}
+
+/* ==================================
+      FOOTER - PREMIUM NAVY DARK
+================================== */
+.footer {
+    background-color: #0f172a !important; /* Deep Navy Blue */
+    color: #94a3b8 !important; /* Light slate text */
+    padding: 60px 0 30px 0;
+    border-top: none !important;
+}
+
+.footer .title {
+    color: #f8fafc !important; /* White Titles */
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+.footer .title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--primary-color) !important;
+    border-radius: 2px;
+}
+
+.footer p, .footer a, .footer li, .footer .contact-info p {
+    color: #cbd5e1 !important; /* Very readable light gray */
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: var(--primary-color) !important;
+    text-decoration: none;
+}
+
+/* Footer Social Icons */
+.footer .social a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    padding: 8px 0;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 8px;
+    background: #1e293b !important;
+    color: #f8fafc !important;
+}
+
+.footer .social a:hover {
+    background: var(--primary-color) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+.footer .footer-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer .footer-widget ul li {
+    margin-bottom: 12px;
+    display: block;
+}
+
+.footer .footer-widget ul li a {
+    color: #cbd5e1 !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.footer .footer-widget ul li a:hover {
+    color: var(--primary-color) !important;
+    padding-left: 5px;
+}
+
+.footer .newsletter .newsletter-group {
+    background: transparent;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch; /* ensure same height */
+}
+
+.footer .newsletter .newsletter-group .form-control {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    color: #f8fafc !important;
+    height: 48px !important;
+    border-radius: 8px 0 0 8px !important;
+    flex: 1;
+    min-width: 0;
+    padding: 0 15px;
+}
+
+.footer .newsletter .newsletter-group .btn {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important; /* Slightly smaller for better fit */
+    height: 48px !important;
+    border-radius: 0 8px 8px 0 !important;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px !important; /* generous but safe horizontal padding */
+    min-width: fit-content;
+}
+
+/* Footer Bottom Strip */
+.footer-bottom {
+    background: #0b1120 !important; /* Ultra dark navy */
+    border-top: 1px solid #1e293b !important;
+    padding: 20px 0;
+    text-align: center;
+}
+.footer-bottom p {
+    margin: 0;
+    color: #64748b !important;
+    font-size: 0.95rem;
+}
+.footer-bottom a {
+    color: var(--primary-color) !important;
+    font-weight: 700;
+}
+.footer-bottom a:hover {
+    color: var(--primary-hover) !important;
+}
