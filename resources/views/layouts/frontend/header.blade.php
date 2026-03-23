@@ -42,7 +42,8 @@
             <div class="col-lg-3 col-md-4">
                 <div class="b-logo">
                     <a href="index.html">
-                        <img src="{{ asset('assets/frontend') }}{{ $getSetting->logo }}" alt="Logo" />
+                        <img src="{{ asset('assets/frontend') }}{{ $getSetting->logo }}" width="90" height="90"
+                            alt="Logo" />
                     </a>
                 </div>
             </div>
@@ -78,7 +79,7 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="{{ route('frontend.home') }}" class="nav-item nav-link active">Home</a>
+                    <a href="{{ route('frontend.home') }}" class="nav-item nav-link">Home</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
                         <div class="dropdown-menu">
@@ -88,11 +89,43 @@
                             @endforeach
                         </div>
                     </div>
-                    
+
                     <a href="{{ route('frontend.contact.show') }}" class="nav-item nav-link">Contact Us</a>
-                    <a href="{{ route('frontend.dashboard.profile.index') }}" class="nav-item nav-link">Dashboard</a>
+                    @auth
+                        <a href="{{ route('frontend.dashboard.profile.index') }}" class="nav-item nav-link">Dashboard</a>
+                    @endauth
                 </div>
                 <div class="social ml-auto">
+                    @auth
+                        <!-- Notification Dropdown -->
+                        <a href="#" class="nav-link dropdown-toggle" id="notificationDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if (auth('web')->user()->unreadNotifications->count() > 0)
+                                <i class="fas fa-bell"></i>
+                                <span id="notify-count"
+                                    class="badge badge-danger">{{ auth('web')->user()->unreadNotifications->count() }}</span>
+                            @else
+                                <i class="fas fa-bell"></i>
+                            @endif
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown"
+                            style="width: 300px">
+                            <h6 class="dropdown-header">Notifications</h6>
+                            @forelse (auth('web')->user()->unreadNotifications as $notification)
+                                <div id="notify-msg">
+                                    <div class="dropdown-item d-flex justify-content-between align-items-center">
+                                        <span>{{ $notification->data['user_name'] }} added comment to your post</span>
+                                        <a href="{{ $notification->data['link'] }}?notify={{ $notification->id }}"><i
+                                                class="fas fa-eye"></i></a>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="dropdown-item text-center">No notifications</div>
+                            @endforelse
+                        </div>
+                    @endauth
+
                     <a href="{{ $getSetting->twitter }}" title="X" target="_blank"><i
                             class="fab fa-twitter"></i></a>
                     <a href="{{ $getSetting->facebook }}" title="Facebook" target="_blank"><i

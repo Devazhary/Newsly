@@ -12,6 +12,28 @@
     <!-- Single News Start-->
     <div class="single-news">
         <div class="container">
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Image Column -->
+                    <div class="col-auto">
+                        <img src="{{ asset($mainPost->user->image) }}" class="img-fluid rounded-circle" alt="Description"
+                            style="width: 40px; height: 40px;">
+                    </div>
+                    <!-- user name -->
+                    <div class="col">
+                        <h4 class="text-secondary">{{ $mainPost->user->name }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="container">
+                <h2>{{ $mainPost->title }}</h2>
+            </div>
+
+
             <div class="row">
                 <div class="col-lg-8">
                     <!-- Carousel -->

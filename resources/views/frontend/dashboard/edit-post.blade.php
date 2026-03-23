@@ -19,7 +19,7 @@
                     class="list-group-item list-group-item-action active menu-item" data-section="profile">
                     <i class="fas fa-user"></i> Profile
                 </a>
-                <a href="" class="list-group-item list-group-item-action menu-item" data-section="notifications">
+                <a href="{{ route('frontend.dashboard.notification.index') }}" class="list-group-item list-group-item-action menu-item" data-section="notifications">
                     <i class="fas fa-bell"></i> Notifications
                 </a>
                 <a href="{{ route('frontend.dashboard.setting.index') }}"

@@ -16,6 +16,7 @@
         "laravel/ui": "^4.6",
         "php-flasher/flasher-laravel": "^2.4",
         "predis/predis": "^3.4",
+        "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-sluggable": "^3.7"
     },
     "require-dev": {

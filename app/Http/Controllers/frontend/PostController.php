@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
-
+use App\Notifications\NewCommentNotify;
 
 class PostController extends Controller
 {
     public function show($slug)
     {
         $mainPost = Post::active()
-        ->with(['comments'=>function($query){$query->latest()->limit(3);}])
+        ->with(['comments'=>function($query){$query->latest()->limit(3);}, 'user'])
         ->where('slug', $slug)
         ->first();
 
@@ -54,8 +54,14 @@ class PostController extends Controller
             'ip_address' => $request->ip(),
         ]);
 
-        $comment->load('user');
+        $post = Post::findOrFail($request->post_id);
+        if(auth('web')->user()->id != $post->user_id)
+        {
+            $post->user->notify(new NewCommentNotify($comment, $post));
+        }
 
+
+        $comment->load('user');
         //check if store
         if(!$comment)
         {

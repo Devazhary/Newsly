@@ -49,6 +49,10 @@
     @yield('body')
 
     @include('layouts.frontend.footer')
+    <script>
+        id = {{ auth('web')->user()->id }}
+    </script>
+    <script src="{{ asset('build/assets/app-DYxBr9_P.js') }}"></script>
 
     <!-- Back to Top -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>

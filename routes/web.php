@@ -9,6 +9,7 @@ use App\Http\Controllers\frontend\PostController;
 use App\Http\Controllers\frontend\ContactController;
 use App\Http\Controllers\frontend\SearchController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\frontend\Dashboard\NotificationController;
 use App\Http\Controllers\frontend\Dashboard\ProfileController;
 use App\Http\Controllers\frontend\Dashboard\SettingController;
 
@@ -50,11 +51,18 @@ Route::name('frontend.')->group(function () {
             Route::post('/post/delete-image', 'deleteImage')->name('post.delete.image');
         });
 
-        // setting part
+        //setting part
         Route::controller(SettingController::class)->prefix('setting')->name('setting.')->group(function(){
             Route::get('/', 'index')->name('index');
             Route::post('/update', 'update')->name('update');
             Route::post('/change-password', 'changePassword')->name('changePassword');
+        });
+
+        //notification part
+        Route::controller(NotificationController::class)->prefix('notification')->name('notification.')->group(function(){
+            Route::get('/', 'index')->name('index');
+            Route::get('/delete-all', 'deleteAll')->name('delete.all');
+            Route::post('/delete', 'delete')->name('delete.one');
         });
     });
 });
