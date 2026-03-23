@@ -4,6 +4,7 @@
 @endsection
 @section('breadcrumb')
     @parent
+    <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
     <li class="breadcrumb-item"><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a>
     </li>
     <li class="breadcrumb-item active">{{ $mainPost->title }}</li>

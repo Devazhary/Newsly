@@ -22,7 +22,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('assets/frontend') }}/css/style.css" rel="stylesheet" />
-    
+
     {{-- bootstrap file input --}}
     <link href="{{ asset('assets/vendor/file-input/css/fileinput.min.css') }}" rel="stylesheet" />
 
@@ -38,9 +38,9 @@
     <div class="breadcrumb-wrap">
         <div class="container">
             <ul class="breadcrumb">
-              @section('breadcrumb')
-              <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
-              @show
+                @section('breadcrumb')
+                    {{-- empty --}}
+                @show
             </ul>
         </div>
     </div>
@@ -49,9 +49,11 @@
     @yield('body')
 
     @include('layouts.frontend.footer')
-    <script>
-        id = {{ auth('web')->user()->id }}
-    </script>
+    @auth
+        <script>
+            id = {{ auth('web')->user()->id }}
+        </script>
+    @endauth
     <script src="{{ asset('build/assets/app-DYxBr9_P.js') }}"></script>
 
     <!-- Back to Top -->

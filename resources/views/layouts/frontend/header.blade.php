@@ -92,7 +92,7 @@
 
                     <a href="{{ route('frontend.contact.show') }}" class="nav-item nav-link">Contact Us</a>
                     @auth
-                        <a href="{{ route('frontend.dashboard.profile.index') }}" class="nav-item nav-link">Dashboard</a>
+                        <a href="{{ route('frontend.dashboard.profile.index') }}" class="nav-item nav-link">Account</a>
                     @endauth
                 </div>
                 <div class="social ml-auto">
@@ -100,19 +100,17 @@
                         <!-- Notification Dropdown -->
                         <a href="#" class="nav-link dropdown-toggle" id="notificationDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @if (auth('web')->user()->unreadNotifications->count() > 0)
+                            
                                 <i class="fas fa-bell"></i>
                                 <span id="notify-count"
                                     class="badge badge-danger">{{ auth('web')->user()->unreadNotifications->count() }}</span>
-                            @else
-                                <i class="fas fa-bell"></i>
-                            @endif
+                            
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown"
                             style="width: 300px">
                             <h6 class="dropdown-header">Notifications</h6>
-                            @forelse (auth('web')->user()->unreadNotifications as $notification)
+                            @forelse (auth('web')->user()->unreadNotifications->take(5) as $notification)
                                 <div id="notify-msg">
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <span>{{ $notification->data['user_name'] }} added comment to your post</span>

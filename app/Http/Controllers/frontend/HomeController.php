@@ -34,7 +34,7 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        $categories = Category::active()->with([
+        $categories = Category::active()->has('posts', '>=' , '2')->with([
             'posts' => function ($query) {
                 $query->active()->latest()->take(4);
             }
