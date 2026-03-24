@@ -47,20 +47,22 @@
                         <div class="nav-item dropdown mr-3">
                             <a href="#" class="nav-link p-0 position-relative" data-toggle="dropdown" style="color:var(--text-dark);">
                                 <i class="fas fa-bell" style="font-size: 1.2rem;"></i>
-                                <span class="badge badge-danger position-absolute" style="top: -6px; right: -8px; font-size: 0.6rem; padding: 0.25em 0.45em; border-radius: 50%;">
+                                <span id="notify-count" class="badge badge-danger position-absolute" style="top: -6px; right: -8px; font-size: 0.6rem; padding: 0.25em 0.45em; border-radius: 50%;">
                                     {{ auth('web')->user()->unreadNotifications->count() }}
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow-sm border-0 mt-2" style="width: 300px; border-radius: 8px;">
                                 <h6 class="dropdown-header font-weight-bold" style="background: #f8fafc; padding: 10px 15px; border-bottom: 1px solid #e2e8f0; border-radius: 8px 8px 0 0;">Notifications</h6>
-                                @forelse (auth('web')->user()->unreadNotifications->take(5) as $notification)
-                                    <div class="dropdown-item d-flex justify-content-between align-items-center border-bottom py-2 px-3" style="white-space: normal; font-size: 0.85rem;">
-                                        <span><strong>{{ $notification->data['user_name'] }}</strong> added comment</span>
-                                        <a href="{{ $notification->data['link'] }}?notify={{ $notification->id }}" class="btn btn-sm btn-link p-0 text-primary ml-2"><i class="fas fa-eye"></i></a>
-                                    </div>
-                                @empty
-                                    <div class="dropdown-item text-center py-3 text-muted">No notifications</div>
-                                @endforelse
+                                <div id="notify-msg">
+                                    @forelse (auth('web')->user()->unreadNotifications->take(5) as $notification)
+                                        <div class="dropdown-item d-flex justify-content-between align-items-center border-bottom py-2 px-3" style="white-space: normal; font-size: 0.85rem;">
+                                            <span><strong>{{ $notification->data['user_name'] }}</strong> added comment</span>
+                                            <a href="{{ $notification->data['link'] }}?notify={{ $notification->id }}" class="btn btn-sm btn-link p-0 text-primary ml-2"><i class="fas fa-eye"></i></a>
+                                        </div>
+                                    @empty
+                                        <div class="dropdown-item text-center py-3 text-muted no-notif">No notifications</div>
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
 

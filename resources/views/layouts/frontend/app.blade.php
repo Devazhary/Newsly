@@ -55,7 +55,7 @@
             id = {{ auth('web')->user()->id }}
         </script>
     @endauth
-    <script src="{{ asset('build/assets/app-DYxBr9_P.js') }}"></script>
+    <script src="{{ asset('build/assets/app-SSYpJMTX.js') }}"></script>
 
     <!-- Back to Top -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
