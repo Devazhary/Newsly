@@ -74,8 +74,4 @@ Route::prefix('email')->name('verification.')->controller(VerificationController
    Route::post('/resend', 'resend')->name('resend');
 });
 
-Route::get('/test', function(){
-    return view('frontend.dashboard.edit-post');
-});
-
 Auth::routes();
