@@ -26,12 +26,12 @@ class ProfileController extends Controller
 
     public function postStore(ProfileRequest $request)
     {
+        $request->validated();
 
         try {
 
             DB::beginTransaction();
 
-            $request->validated();
             $request->commentable == "on" ? $request->merge(['commentable' => 1]) : $request->merge(['commentable' => 0]);
             $post = auth()->guard('web')->user()->posts()->create($request->except(['_token', 'images']));
 
@@ -42,12 +42,10 @@ class ProfileController extends Controller
             Cache::forget('latest_posts');
         } catch (\Exception $e) {
             DB::rollBack();
-            Session::flash('error', 'An error occurred while creating the post.');
-            return redirect()->back();
+            return redirect()->back()->with('error', 'An error occurred while creating the post.');
         }
 
-        Session::flash('success', 'Post created successfully.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Post created successfully.');
     }
 
     public function postDelete(Request $request, $slug)
@@ -125,12 +123,10 @@ class ProfileController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            Session::flash('error', 'An error occurred while update the post.');
-            return redirect()->back();
+            return redirect()->back()->with('error', 'An error occurred while updating the post.');
         }
 
-        Session::flash('success', 'Post Updated Successfully');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Post Updated Successfully!');
     }
 
     public function deleteImage(Request $request)

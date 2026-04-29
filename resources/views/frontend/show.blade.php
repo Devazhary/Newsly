@@ -20,9 +20,9 @@
                     <div class="post-header mb-4">
                         <h1 class="font-weight-bold" style="font-size: 2.2rem; line-height: 1.3; color: var(--text-dark);">{{ $mainPost->title }}</h1>
                         <div class="d-flex align-items-center mt-3 pb-3 border-bottom">
-                            <img src="{{ asset($mainPost->user->image) }}" class="rounded-circle shadow-sm" alt="{{ $mainPost->user->name }}" style="width: 50px; height: 50px; object-fit: cover;">
+                            <img src="{{ asset($mainPost->user->image ?? 'uploads/users/admin.png') }}" class="rounded-circle shadow-sm" alt="{{ $mainPost->user_id == null ? $mainPost->admin->name : $mainPost->user->name }}" style="width: 50px; height: 50px; object-fit: cover;">
                             <div class="ml-3">
-                                <h6 class="mb-0 font-weight-bold text-primary" style="font-size: 1.1rem;">{{ $mainPost->user->name }}</h6>
+                                <h6 class="mb-0 font-weight-bold text-primary" style="font-size: 1.1rem;">{{ $mainPost->user_id == null ? $mainPost->admin->name : $mainPost->user->name }}</h6>
                                 <small class="text-muted"><i class="far fa-calendar-alt mr-1"></i>{{ $mainPost->created_at->format('M d, Y') }}</small>
                             </div>
                         </div>

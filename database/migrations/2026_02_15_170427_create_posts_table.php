@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('slug');
             $table->bigInteger('num_of_views')->default(0);
             $table->boolean('commentable')->default(true);
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('admin_id')->nullable()->constrained('admins')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('status')->default(true);
             $table->timestamps();

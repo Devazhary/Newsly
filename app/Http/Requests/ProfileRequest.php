@@ -21,13 +21,21 @@ class ProfileRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:10'],
-            'commentable' => ['in:on,off'],
+            'commentable' => ['in:on,off,0,1'],
+            'status' => ['nullable', 'in:0,1'],
             'category_id' => ['exists:categories,id'],
-            'images' => ['nullable'],
             'images.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
         ];
+
+        if ($this->isMethod('post')) {
+            $rules['images'] = ['required'];
+        } else {
+            $rules['images'] = ['nullable'];
+        }
+
+        return $rules;
     }
 }

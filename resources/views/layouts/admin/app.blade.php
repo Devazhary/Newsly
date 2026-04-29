@@ -21,6 +21,12 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/dashboard') }}/css/sb-admin-2.min.css" rel="stylesheet">
 
+    {{-- bootstrap file input --}}
+    <link href="{{ asset('assets/vendor/file-input/css/fileinput.min.css') }}" rel="stylesheet" />
+
+    {{-- summernote --}}
+    <link href="{{ asset('assets/vendor/summernote/summernote-bs4.min.css') }}" rel="stylesheet" />
+
 </head>
 
 <body id="page-top">
@@ -105,6 +111,14 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/dashboard') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('assets/dashboard') }}/js/demo/chart-pie-demo.js"></script>
+
+    {{-- bootstrap file input --}}
+    <script src="{{ asset('assets/vendor/file-input/js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/file-input/themes/fa5/theme.min.js') }}"></script>
+
+    {{-- summernote --}}
+    <script src="{{ asset('assets/vendor/summernote/summernote-bs4.min.js') }}"></script>
+    @stack('js')
 
 </body>
 
