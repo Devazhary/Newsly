@@ -26,7 +26,7 @@ class CheckSettingProvider extends ServiceProvider
             return Setting::create([
                 'site_name' => 'Newsly',
                 'favicon' => 'favicon.ico',
-                'logo' => '/img/Newsly.png',
+                'logo' => 'uploads/imgs/Newsly.png',
                 'facebook' => 'https://www.facebook.com/',
                 'instagram' => 'https://www.instagram.com/',
                 'twitter' => 'https://x.com/',

@@ -6,7 +6,6 @@
     <center>
         <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
             <div class="card-body shadow mb-4 col-10">
                 <h1>Edit Settings</h1>
                 
@@ -155,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-
+                <input type="hidden" name="setting_id" value="{{ $getSetting->id}}">
                 <div class="row mt-3">
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Update Settings</button>

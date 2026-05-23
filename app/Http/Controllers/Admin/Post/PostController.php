@@ -23,7 +23,7 @@ class PostController extends Controller
         $order_by = request()->order_by ?? 'desc';
         $limit_by = request()->limit_by ?? 5;
 
-        $posts = Post::when(request()->keyword, function ($query) {
+        $posts = Post::where('user_id', '!=', null)->when(request()->keyword, function ($query) {
             $query->where('title', 'LIKE', '%' . request()->keyword . '%');
         })
             ->when(!is_null(request()->status), function ($query) {

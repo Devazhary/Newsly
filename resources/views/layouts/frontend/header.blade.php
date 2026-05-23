@@ -4,7 +4,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white px-0 py-2">
             <!-- Left: Logo -->
             <a href="{{ route('frontend.home') }}" class="navbar-brand m-0 p-0 mr-4">
-                <img src="{{ asset('assets/frontend') }}{{ $getSetting->logo }}" alt="Logo" class="d-inline-block align-top" style="max-height: 45px; width: auto; object-fit: contain;" />
+                <img src="{{ asset($getSetting->logo) }}" alt="Logo" class="d-inline-block align-top" style="max-height: 45px; width: auto; object-fit: contain;" />
             </a>
             
             <button type="button" class="navbar-toggler border-0" data-toggle="collapse" data-target="#navbarCollapse">
